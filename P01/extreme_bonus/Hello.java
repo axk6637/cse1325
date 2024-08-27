@@ -1,9 +1,7 @@
-import java.util.Scanner;
 
-public class Hello 
-{
+public class Hello {
     public static void main(String[] args){
-        String userName= System.getProperty("user.name");
+        String userName= System.getenv("USERNAME");
         System.out.println("Hello, " + userName +"!");
         
     }
