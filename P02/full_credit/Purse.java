@@ -1,24 +1,24 @@
 public class Purse {
-   //Array type Coin containing 5 coins and a Coin Object  
+
+    //Array of Coin containing 5 coins with Coin object and dates
     public static void main(String[] args){
         Coin[] purse={
             new Coin(Denomination.PENNY, 1924),
-            new Coin(Denomination.PENNY, 1980),
             new Coin(Denomination.NICKEL, 1945),
             new Coin(Denomination.DIME, 1990),
             new Coin(Denomination.QUARTER, 2010),
+            new Coin(Denomination.PENNY, 1988),
 
         };
 
-        //totalValue
         double totalValue= 0.0;
         int earliestYear= Integer.MAX_VALUE;
         int latestYear = Integer.MIN_VALUE;
 
-        //for loop
         for (Coin coin: purse){
             totalValue +=coin.getValue();
             int year =coin.getYear();
+
             if (year < earliestYear){
                 earliestYear =year;
             }
