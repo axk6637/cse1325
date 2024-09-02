@@ -7,23 +7,14 @@ public class Purse {
             new Coin(Denomination.NICKEL, 1945),
             new Coin(Denomination.DIME, 1990),
             new Coin(Denomination.QUARTER, 2010),
+            new Coin(Denomination.PENNY, 1988),
     
         };
     
         double totalValue= 0.0;
         int earliestYear= Integer.MAX_VALUE;
-        int latestYear = Integer.MIN_VALUE; for (Coin coin: purse){
-            totalValue +=coin.getValue();
-            System.out.println(coin);
-            int year =coin.getYear();
-    
-            if (year < earliestYear){
-                earliestYear =year;
-            }
-            if (year> latestYear){
-                latestYear= year;
-            }
-        }
+        int latestYear = Integer.MIN_VALUE;
+        
 
         //for-loop
         for (Coin coin: purse){
