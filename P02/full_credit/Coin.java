@@ -22,6 +22,6 @@ public class Coin {
      
      // Method
      public int getYear(){
-         return year;
+         return this.year;
      }
 }
