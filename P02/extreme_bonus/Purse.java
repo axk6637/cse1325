@@ -7,7 +7,7 @@ public class Purse {
             new Coin(Denomination.NICKEL, 1945),
             new Coin(Denomination.DIME, 1990),
             new Coin(Denomination.QUARTER, 2010),
-            new Coin(Denomination.PENNY, 1988),
+            new Coin(Denomination.QUARTER, 1988),
 
         };
 
