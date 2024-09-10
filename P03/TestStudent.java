@@ -39,9 +39,33 @@ public class TestStudent{
         System.err.println("FAIL! Unexpected exception type: "+ e.getClass().getName());
         System.exit(-1);
         totalErrors++;
-    }
+        }
 
-    
+        //3rd vector test
+        try{
+            Student student3 = new Student("Ash Kar", 6637, "axk6637@mavs.uta.edu");
+            Media media= new Media("Example Title", "https://example.com");
+            String expectedMediaReq= "Playing Example Title (https://example.com)";
+
+            if (!student3.requestMedia(media).equals(expectedMediaReq)) {
+                throw new IllegalArgumentException("FAIL! requestMedia() returned incorrect output");
+            }
+            } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            totalErrors++; 
+            } catch (Exception e) {
+            //Any other exception
+            System.err.println("FAIL: Unexpected exception: " + e.getMessage());
+            totalErrors++; 
+            }
+    if (totalErrors>0){
+        System.exit(totalErrors);
+    }else{
+        System.exit(0);
+        }
+
     }
+    
 }
+
 
