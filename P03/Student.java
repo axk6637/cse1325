@@ -9,7 +9,7 @@ public class Student {
     //Method 1
     public Student(String name, int id, String email){
         if(!email.toLowerCase().endsWith("uta.edu") && !email.toLowerCase().endsWith("@mavs.uta.edu")){
-            throw new IllegalArgumentException("Non-UTA email address"+ email);
+            throw new IllegalArgumentException("Non-UTA email address: "+ email);
         }
         this.name=name;
         this.id=id;
@@ -25,7 +25,7 @@ public class Student {
     //Override
     @Override
     public String toString(){
-        return name + "(" + id + ","+ email +"," + "Account #" account.getAccountNumber() + ")" ;
+        return name + "(" + id + ","+ email +"," + " Account #" + account.getAccountNumber() + ")" ;
     }
 
 }
