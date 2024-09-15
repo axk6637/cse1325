@@ -1,7 +1,7 @@
 package customer;
 import product.Media;
 
-public class Account{
+public abstract class Account{
     // private fields
 
     private int accountNumber;
@@ -18,8 +18,5 @@ public class Account{
     }
 
     //Method 3
-    public String play(Media media){
-        return "Playing " + media.toString();
-        
-    }
+    public abstract String play(Media media);
 }
