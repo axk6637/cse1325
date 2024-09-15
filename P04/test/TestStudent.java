@@ -1,5 +1,6 @@
 package test;
-
+import customer.Student;
+import product.Media;
 
 public class TestStudent{
     public static void main(String[] args) {
