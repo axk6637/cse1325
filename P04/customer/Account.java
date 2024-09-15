@@ -1,6 +1,5 @@
 package customer;
 
-
 public class Account{
     // private fields
 

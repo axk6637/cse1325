@@ -1,5 +1,3 @@
-package product;
-
 public class Media{
 
     //Private fields
