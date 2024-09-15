@@ -1,5 +1,4 @@
 package product;
-import java.net.URL;
 
 public class Media{
 
@@ -23,8 +22,8 @@ public class Media{
     //Overrride
     @Override
     public String toString(){
-        return title + " (" + url + ", "+ points + "points" + ")";
-        
+        return title + " (" + url + ", "+ points + " points" + ")";
+
     }
 
 }

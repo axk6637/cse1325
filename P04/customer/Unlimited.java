@@ -1,7 +1,7 @@
 package customer;
 import product.Media;
 
-public class Unlimited {
+public class Unlimited extends Account {
     //No need to use constructor as java will use the default constructor
 
     //Override play method from Account
