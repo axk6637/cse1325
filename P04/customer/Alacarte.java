@@ -16,7 +16,13 @@ public class Alacarte extends Account{
     @Override
     public String play(Media media){
         int mediaPoints= media.getPoints();// getting points from media instance of class Media
-        if 
+        if (pointsRemaining>= mediaPoints){
+            pointsRemaining -=mediaPoints;
+            return "Playing " +media.toString();
+
+        }else{
+            return "Buy more points: Requires " +mediaPoints + " points, you have "  + pointsRemaining ;
+        }
     }
 
 }
