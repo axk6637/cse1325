@@ -45,11 +45,13 @@ public class TestStudent{
         totalErrors++;
         }
 
+        
+
         //3rd vector test
         try{
             Student student3 = new Student("Ash Kar", 6637, "axk6637@mavs.uta.edu");
-            Media media= new Media("Example Title", "https://example.com");
-            String expectedMediaReq= "Playing Example Title (https://example.com)";
+            Media media= new Media("Example Title", "https://example.com", 123);
+            String expectedMediaReq= "Playing Example Title (https://example.com), 123";
 
             if (!student3.requestMedia(media).equals(expectedMediaReq)) {
                 throw new IllegalArgumentException("FAIL! requestMedia() returned incorrect output");

@@ -4,7 +4,7 @@ import product.Media;
 public class TestMedia {
     public static void main(String[] args){
         Media media = new Media("Example Title", "https://example.com", 123);
-        String expected= "Example Title (https://example.com, 123 points)";
+        String expected= "Example Title (https://example.com, 123)";
         String actual= media.toString();
 
         if(actual.equals(expected)==false){
