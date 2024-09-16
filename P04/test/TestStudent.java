@@ -7,7 +7,7 @@ public class TestStudent{
         int totalErrors=0; 
         //1st vector test
         try{
-            Student student1 = new Student("Prof Rice", 1234567, "george.rice@uta.edu");
+            Student student1 = new Student("Prof Rice", 1234567, "george.rice@uta.edu", true);
             String actualString = student1.toString();
             String expectedStringStart = "Prof Rice(1234567,george.rice@uta.edu, Account #";
             
@@ -22,7 +22,7 @@ public class TestStudent{
 
        // 2nd Vector test for non-UTA emails
        try{
-        Student student2= new Student("Bill Gates", 123, "bill@gmail.com");
+        Student student2= new Student("Bill Gates", 123, "bill@gmail.com", true);
 
         //Condition 1: Report as an error if NO exception being thrown
         throw new IllegalArgumentException("Expected IllegalArgumentException but not thrown");
@@ -49,10 +49,11 @@ public class TestStudent{
 
         //3rd vector test
         try{
-            Student student3 = new Student("Ash Kar", 6637, "axk6637@mavs.uta.edu");
+            Student student3 = new Student("Ash Kar", 6637, "axk6637@mavs.uta.edu", true);
             Media media= new Media("Example Title", "https://example.com", 123);
             String expectedMediaReq= "Playing Example Title (https://example.com, 123)";
-
+            System.out.println(expectedMediaReq);
+            System.out.println(student3.requestMedia(media));
             if (!student3.requestMedia(media).equals(expectedMediaReq)) {
                 throw new IllegalArgumentException("FAIL! requestMedia() returned incorrect output");
             }

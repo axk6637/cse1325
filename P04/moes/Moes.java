@@ -14,8 +14,8 @@ import java.util.ArrayList;
  * @since 2024
  */
 public class Moes {
-    private ArrayList<Media> library = new ArrayList<>();
-    private ArrayList<Student> customers= new ArrayList<>();
+    private ArrayList<Media> library = new ArrayList<>();//media objects
+    private ArrayList<Student> customers= new ArrayList<>();//stduent objects
 
 /**
  * Adds a Media object to the library
@@ -48,7 +48,7 @@ public String getStudentList(){
 
     for (int i=0; i<customers.size(); i++){
         Student student= customers.get(i);
-        studentList.append(i).append(") ").append(student.toString()).append(student.toString()).append("\n");
+        studentList.append(i).append(") ").append(student.toString()).append("\n");
     }
     return studentList.toString();
 }
@@ -77,7 +77,7 @@ public String getMediaList(){
  */
 public int getPoints(int studentIndex){
     Student student= customers.get(studentIndex);
-    Account account =student.account;
+    Account account = student.getAccount();
 
     if(account instanceof Alacarte){
         return ((Alacarte)account).getPointsRemaining();
@@ -96,13 +96,13 @@ public int getPoints(int studentIndex){
  * @since 2024
  */
 public String buyPoints(int studentIndex, int points){
-    Student student = new customer.get(studentIndex);
-    Account account =student.account;
+    Student student = customers.get(studentIndex);
+    Account account = student.getAccount();
 
     if(account instanceof Alacarte){
         Alacarte alacarteAccount = (Alacarte) account;
         alacarteAccount.buyPoints(points);
-        return "Student now has " +alacarteAccount.getPointsRemaining()
+        return "Student now has " +alacarteAccount.getPointsRemaining();
 
     }else if (account instanceof Unlimited){
         return "Student has an unlimited account and needs no additions points.";
