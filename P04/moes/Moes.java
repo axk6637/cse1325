@@ -7,7 +7,7 @@ import customer.Unlimited;
 import java.util.ArrayList;
 
 /**
- * The Moes class manages ArrayLists of Student and Media objects like adding students and media, handling points, playing media
+ * The Moes class manages ArrayLists of Student and Media objects like adding students and media, handling points, playing media.
  * 
  * @author Aashreeya Karmacharya
  * @version 0.2

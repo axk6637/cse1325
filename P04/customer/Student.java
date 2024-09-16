@@ -1,6 +1,12 @@
 package customer;
 import product.Media;
-
+/**
+ * Represents a student in the MOES system to stote information about the student.
+ * 
+ * @author Aashreeya Karmacharya
+ * @version 0.2  
+ * @since 2024
+ */
 public class Student {
 
     //private fields
@@ -8,8 +14,15 @@ public class Student {
     private int id;
     private String email;
     private Account account;
-
-    //Method 1
+/** 
+ * Constructs a new student with name, ID, and email.
+ * 
+ * @param name The name of the student.
+ * @param id The ID of the student.
+ * @param email The email address of the student.
+ * @since 0.2
+ */
+    //Constructor 1
     public Student(String name, int id, String email){
         if(!email.toLowerCase().endsWith("uta.edu") && !email.toLowerCase().endsWith("@mavs.uta.edu")){
             throw new IllegalArgumentException("Non-UTA email address: "+ email);
@@ -20,11 +33,20 @@ public class Student {
         //newly instanced Account
         this.account= new Account();
     }   
-
+/**
+ * Requests a media object to play through the student's account.
+ * 
+ * @param media The media to be played.
+ * @return A message that indicates the result of playing media.
+ * @since 2024
+ */
     public String requestMedia(Media media){
         return account.play(media);
     }
-
+/**
+ * Returns the string representation of the student with name, id, email, and account number.
+ * @since 2024
+ */
     //Override
     @Override
     public String toString(){
