@@ -1,5 +1,6 @@
 package customer;
 import product.Media;
+
 /**
  * Represents an unlimited student account in the MOES System.
  * Allows unlimited access to media.

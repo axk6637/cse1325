@@ -3,7 +3,7 @@ package product;
 /**
  * Represents a piece of media with a title, URL, and points required to access the media
  * 
- * @author Student
+ * @author Aashreeya Karmacharya
  * @version 0.2
  * @since 2024
  */

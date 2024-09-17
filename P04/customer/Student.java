@@ -15,13 +15,15 @@ public class Student {
     private int id;
     private String email;
     private Account account;
+
 /** 
  * Constructs a new student with name, ID, and email.
+ * Throws exception if not UTA email.
  * 
  * @param name The name of the student.
  * @param id The ID of the student.
  * @param email The email address of the student.
- * @since 0.2
+ * @since 2024
  */
     //Constructor 1
     public Student(String name, int id, String email, boolean unlimited){
@@ -43,23 +45,17 @@ public class Student {
     
    
     } 
-    
+/**
+ * Returns the account of the student.
+ * @return account of student.
+ * @since 2024
+ * 
+ */
     public Account getAccount(){
         return account;
     }
 
-//public Alacarte getAlacarteAccount(){
-   // if (account instanceof Alacarte){
-     //   return (Alacarte)account;
-        
-  //  }
-//}
 
-//public Unlimited getUnlimitedAccount(){
-   // if(account instanceof Unlimited){
-   //     return (Unlimited)account;
-   // }
-//}
 
 /**
  * Requests a media object to play through the student's account.
@@ -72,9 +68,6 @@ public class Student {
         return account.play(media);
     }
 
-    //public Account getAccount(){
-       // return this.account;
-    //}
 /**
  * Returns the string representation of the student with name, id, email, and account number.
  * @since 2024

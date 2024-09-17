@@ -13,22 +13,24 @@ public abstract class Account{
 
     private int accountNumber;
     private static int nextAccountNumber =1;
+
 /**
  * Constructs a new Account and assigns a unique account number.
  * 
  * @since 2024
  */
-    //Method 1 
+    //Constructor 1 
     public Account(){
         this.accountNumber = nextAccountNumber++;
     }
+
 /**
  * Returns the account number of the student's account.
  * @return The account number.
  * @since 2024
  */
 
-    //Method 2
+    //Method 1
     public int getAccountNumber(){
         return accountNumber;
     }
@@ -41,6 +43,6 @@ public abstract class Account{
  * @since 2024
  */
 
-    //Method 3
+    //Method 2
     public abstract String play(Media media);
 }

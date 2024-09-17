@@ -32,6 +32,7 @@ public class Alacarte extends Account{
     public int getPointsRemaining(){
         return this.pointsRemaining;
     }
+    
 /**
  * Plays the requested media if the points are sufficient, if not indicates the additional points required.
  * 
