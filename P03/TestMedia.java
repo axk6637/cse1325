@@ -10,8 +10,9 @@ public class TestMedia {
             //Return non-zero error code
             System.exit(-1);
         }
-
     }
+        //No output if test vectors pass
 }
+
 
         

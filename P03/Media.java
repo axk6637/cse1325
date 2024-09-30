@@ -1,3 +1,4 @@
+
 public class Media{
 
     //Private fields
@@ -9,7 +10,6 @@ public class Media{
         this.title=title;
         this.url=url;
     }
-
 
     //Overrride
     @Override
