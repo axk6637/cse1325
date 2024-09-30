@@ -88,11 +88,29 @@ public class Main {
     //Method to Add Media
     private void addMedia(){
         System.out.print("Enter media title: ");
-        String title= scanner.nectLine();
+        String title= scanner.nextLine();
+        System.out.print("Enter URL: ");
+        String url= scanner.nextLine();
+        System.out.print("Enter points: ");
+        int points = scanner.nextInt();
+        scanner.nextLine();
+
+        Media media= new Meida(title, url, points);
+        moes.addMedia(media);
+        System.out.println("Added Media");
     }
 
+    //Method to List All Media
+    private void listMedia(){
+        String mediaList= moes.getMediaList();
+        System.out.println(mediaList);
+    }
 
-
+    //Method to Play the selected media
+    private void playMedia(){
+        listStudents;
+        System.out.println("Enter Student ");
+    }
     
 
 
