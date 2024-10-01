@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main {
     private Moes moes;
     private Menu menu;
-    private String output;
     private boolean running;
     private Scanner scanner=new Scanner(System.in);
 
@@ -51,13 +50,31 @@ public class Main {
         main.mdi();
     }
 
-    //Main loop : Displays the menu to the user and runs the item selected by the user
+    //Method to display a title
+    private void moesTitle(){
+        String title= """
+                 \\\\\\///
+                  (@@)
+     ._________o00-(_)-00o_________.
+     |                             |
+     |  MAVS ONLINE ENTERTAINMENT  |
+     |            SYSTEM           |
+     |            (MOES)           |
+     |         Version 2.0         |
+     | @2024 Aashreeya Karmacharya |
+     |_____________________________| 
+                """;
+        System.out.println(title);
+    }
+
+    //Main loop : Displays the menu 0to the user and runs the item selected by the user
     public void mdi(){
-        System.out.println("Welconme to Mavs Online Entertainment System (MOES)!!");
-        
+        System.out.println("Welcome to Mavs Online Entertainment System (MOES)!!");
+        moesTitle(); //Display the banner/title
+
         while(running){
             System.out.println(menu);
-            System.out.println("Make a selection: ");
+            System.out.print("Make a selection: ");
             int select=scanner.nextInt();
             scanner.nextLine();
             menu.run(select);
@@ -111,7 +128,7 @@ public class Main {
     //Method to Play the selected media
     private void playMedia(){
         listStudents();
-        System.out.println("Enter Student number");
+        System.out.print("Enter student number: ");
         int studentIndex = scanner.nextInt();
         scanner.nextLine();
 
@@ -126,7 +143,7 @@ public class Main {
 
         //Display the media according to user input
         listMedia();
-        System.out.print("Enter media index: ");
+        System.out.print("Enter media number: ");
         int mediaIndex = scanner.nextInt();
         scanner.nextLine();
 
@@ -144,7 +161,7 @@ public class Main {
     //Method to List Available points for Student
     private void buyPoints(){
         listStudents();
-        System.out.print("Enter Student index: ");
+        System.out.print("Enter Student number: ");
         int studentIndex= scanner.nextInt();
         scanner.nextLine();
         System.out.println("Your Current points: "+ moes.getPoints(studentIndex));
@@ -159,15 +176,26 @@ public class Main {
         }else{
             System.out.println("Invalid points entered!!");
         }
-
-
+    }
+    //Method to List Available Points for Student
+    private void listAvailablePoints() {
+        listStudents();
+        System.out.print("Enter student number: ");
+        int studentIndex = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        int points = moes.getPoints(studentIndex);
+        if (points == Integer.MAX_VALUE) {
+            System.out.println("Unlimited Account: Infinite points available!");
+        } else {
+            System.out.println("Available points: " + points);
+        }
+    }
+    //Ending the Application
+    private void endApp() {
+        System.out.println("Exiting application...Thank you for Visiting!");
+        running = false;
+    }
     }
     
-
-
-
-
-
-    }
 
 
