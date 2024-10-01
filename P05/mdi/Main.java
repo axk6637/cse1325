@@ -1,4 +1,5 @@
 package mdi;
+
 import moes.Moes;
 import product.Media;
 import customer.Student;
@@ -9,6 +10,7 @@ public class Main {
     private Menu menu;
     private String output;
     private boolean running;
+    private Scanner scanner=new Scanner(System.in);
 
     public Main(){
         moes =new Moes();
@@ -29,7 +31,7 @@ public class Main {
             listAvailablePoints();
         }));
         menu.addMenuItem(new MenuItem("Buy Points", () ->{
-            buyMedia();
+            buyPoints();
         }));
         menu.addMenuItem(new MenuItem("Add Media", () ->{
             addMedia();
@@ -72,9 +74,9 @@ public class Main {
         System.out.print("Enter valid student email: ");
         String email= scanner.nextLine();
         System.out.print("Do you want Unlimited Account? (yes/no): ");
-        boolean inUnlimited= scanner.nextLine().equalsIgnoreCase("yes");
+        boolean Unlimited= scanner.nextLine().equalsIgnoreCase("yes");
 
-        Student student= new Student(name, id, email, isUnlimited);
+        Student student= new Student(name, id, email, Unlimited);
         moes.addStudent(student);
         System.out.println("Student added.");
     }
@@ -95,7 +97,7 @@ public class Main {
         int points = scanner.nextInt();
         scanner.nextLine();
 
-        Media media= new Meida(title, url, points);
+        Media media= new Media(title, url, points);
         moes.addMedia(media);
         System.out.println("Added Media");
     }
@@ -108,8 +110,57 @@ public class Main {
 
     //Method to Play the selected media
     private void playMedia(){
-        listStudents;
-        System.out.println("Enter Student ");
+        listStudents();
+        System.out.println("Enter Student number");
+        int studentIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        //Display the available points for the selected student
+        int point= moes.getPoints(studentIndex);
+        if(point == Integer.MAX_VALUE){
+            System.out.println("UNLIMITED ACCOUNT");
+        }else{
+            System.out.println("Available Points: "+ point);
+     
+        }
+
+        //Display the media according to user input
+        listMedia();
+        System.out.print("Enter media index: ");
+        int mediaIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        //Play the media
+        String resultMedia =moes.playMedia(studentIndex, mediaIndex);
+        System.out.println(resultMedia);
+
+        //Display remaning points in Alacarte accounts
+        if (point != Integer.MAX_VALUE){
+            System.out.println("Remaining points: "+ moes.getPoints(studentIndex));
+
+        }
+    }
+
+    //Method to List Available points for Student
+    private void buyPoints(){
+        listStudents();
+        System.out.print("Enter Student index: ");
+        int studentIndex= scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Your Current points: "+ moes.getPoints(studentIndex));
+        System.out.print("Enter points to buy: ");
+        int morePoints=scanner.nextInt();
+        scanner.nextLine();
+
+        if(morePoints>0){
+            String result= moes.buyPoints(studentIndex, morePoints);
+            System.out.println(result);
+
+        }else{
+            System.out.println("Invalid points entered!!");
+        }
+
+
     }
     
 
@@ -119,4 +170,4 @@ public class Main {
 
     }
 
-}
+
