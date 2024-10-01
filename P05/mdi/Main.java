@@ -158,7 +158,7 @@ public class Main {
         }
     }
 
-    //Method to List Available points for Student
+    //Method to buy points
     private void buyPoints(){
         listStudents();
         System.out.print("Enter Student number: ");
