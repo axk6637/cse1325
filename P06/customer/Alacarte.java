@@ -1,4 +1,8 @@
 package customer;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import product.Media;
 /**
  * Represents an alacarte student account in the MOES System.
@@ -32,7 +36,20 @@ public class Alacarte extends Account{
     public int getPointsRemaining(){
         return this.pointsRemaining;
     }
-    
+    public Alacarte() {
+        super();  
+        this.pointsRemaining = 0;  // Setting Default value
+    }
+    public Alacarte(BufferedReader br) throws IOException {
+        super(br);  // Call, chain to the superclass constructor to read accountNumber
+        this.pointsRemaining = Integer.parseInt(br.readLine());  // Read pointsRemaining
+    }
+
+    @Override
+    public void save(BufferedWriter bw) throws IOException {
+        super.save(bw);  // Call, chain to the superclass method to save accountNumber
+        bw.write(Integer.toString(pointsRemaining) + '\n');  // Save pointsRemaining
+    }
 /**
  * Plays the requested media if the points are sufficient, if not indicates the additional points required.
  * 
