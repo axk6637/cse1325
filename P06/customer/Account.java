@@ -1,4 +1,8 @@
 package customer;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import product.Media;
 /**
  * Abstract class that represents a student account in the MOES System.
@@ -23,6 +27,18 @@ public abstract class Account{
     public Account(){
         this.accountNumber = nextAccountNumber++;
     }
+    
+     public Account(BufferedReader br) throws IOException {
+        // Reconstruct the account by reading the account number from the file
+        this.accountNumber = Integer.parseInt(br.readLine());
+        nextAccountNumber = Integer.max(nextAccountNumber, accountNumber + 1);
+    }
+
+    public void save(BufferedWriter bw) throws IOException {
+        // Save the account number
+        bw.write(Integer.toString(accountNumber) + '\n');
+    }
+
 
 /**
  * Returns the account number of the student's account.
