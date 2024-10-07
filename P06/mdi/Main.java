@@ -11,9 +11,15 @@ public class Main {
     private boolean running;
     private Scanner scanner=new Scanner(System.in);
 
+    //private static fields
+    private static final String extension = ".moes";
+    private static final String magicCookie = "MOES_MAGIC_COOKIE";
+    private static final String fileVersion = "1.0";
+    private String filename;
+
     public Main(){
         moes =new Moes();
-        menu= new Menu();
+        menu= new Menu();67  
         running=true;
 
         //Adding menu items
@@ -41,7 +47,18 @@ public class Main {
         menu.addMenuItem(new MenuItem("Add a student", () ->{
             addStudent();
         }));
-        
+        menu.addMenuItem(new MenuItem("Save to file", () -> {
+            save();
+        }));
+        menu.addMenuItem(new MenuItem("Save as new file", () -> {
+            saveAs();
+        }));
+        menu.addMenuItem(new MenuItem("Open file", () -> {
+            open();
+        }));
+        menu.addMenuItem(new MenuItem("New MOES", () -> {
+            newMoes();
+        }));
     }
 
     //static main field
