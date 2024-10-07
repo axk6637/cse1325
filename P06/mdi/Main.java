@@ -4,7 +4,9 @@ import moes.Moes;
 import product.Media;
 import customer.Student;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,7 +25,7 @@ public class Main {
 
     public Main(){
         moes =new Moes();
-        menu= new Menu();67  
+        menu= new Menu(); 
         running=true;
 
         //Adding menu items
@@ -236,7 +238,39 @@ public class Main {
         this.filename = newFilename;
         save();
     }
-    
+
+    // Method to load data from a file
+    private void open() {
+        System.out.println("Current filename: "+ filename);
+        System.out.print("Enter a new filename to open: ");
+        String newFilename = scanner.nextLine();
+        if (!newFilename.endsWith(extension)) {
+            newFilename += extension;
+        }
+        try (BufferedReader br = new BufferedReader(new FileReader(newFilename))) {
+            String cookie = br.readLine();
+            if (!magicCookie.equals(cookie)) {
+                throw new IOException("Invalid file format: magic cookie mismatch");
+            }
+            String version = br.readLine();
+            if (!fileVersion.equals(version)) {
+                throw new IOException("File version mismatch");
+            }
+            Moes newMoes = new Moes(br);
+            moes = newMoes;
+            this.filename = newFilename;
+            System.out.println("Data successfully loaded from " + filename);
+        } catch (IOException e) {
+            System.err.println("Failed to open file: " + e.getMessage());
+        }
+    }
+// Create a new MOES system
+private void newMoes() {
+    moes = new Moes();
+    filename = null;
+    System.out.println("New MOES system created.");
+}
+
     //Ending the Application
     private void endApp() {
         System.out.println("Exiting application...Thank you for Visiting!");

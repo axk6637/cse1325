@@ -21,6 +21,11 @@ public class Moes {
     private ArrayList<Media> library = new ArrayList<>();//media objects
     private ArrayList<Student> customers= new ArrayList<>();//stduent objects
 
+    public Moes() {
+        this.library = new ArrayList<>();  // Initialize an empty library
+        this.customers = new ArrayList<>();  // Initialize an empty customers list
+    }
+    
 /**
  * Adds a Media object to the library
  * 
