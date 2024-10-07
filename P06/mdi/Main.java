@@ -3,6 +3,10 @@ package mdi;
 import moes.Moes;
 import product.Media;
 import customer.Student;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -207,6 +211,32 @@ public class Main {
             System.out.println("Available points: " + points);
         }
     }
+
+    private void save() {
+        if (filename == null) {
+           saveAs();
+            return;
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+            bw.write(magicCookie + "\n");
+            bw.write(fileVersion + "\n");
+            moes.save(bw);
+            System.out.println("Data saved to " + filename);
+        } catch (IOException e) {
+            System.err.println("Failed to save: " + e.getMessage());
+        }
+    }
+     private void saveAs() {
+        System.out.println("Current filename: "+ filename);
+        System.out.print("Enter a new filename: ");
+        String newFilename = scanner.nextLine();
+        if (!newFilename.endsWith(extension)) {
+            newFilename += extension;
+        }
+        this.filename = newFilename;
+        save();
+    }
+    
     //Ending the Application
     private void endApp() {
         System.out.println("Exiting application...Thank you for Visiting!");
