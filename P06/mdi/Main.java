@@ -20,7 +20,7 @@ public class Main {
     //private static fields
     private static final String extension = ".moes";
     private static final String magicCookie = "MOES_MAGIC_COOKIE";
-    private static final String fileVersion = "1.0";
+    private static final String fileVersion = "2.0";
     private String filename;
     private boolean dirty;
 
@@ -250,7 +250,7 @@ public class Main {
             }
         }
 
-        System.out.println("Current filename: "+ filename);
+        System.out.println("\nCurrent filename: "+ filename);
         System.out.print("Enter a new filename to open: ");
         String newFilename = scanner.nextLine();
         if (!newFilename.endsWith(extension)) {
@@ -259,11 +259,11 @@ public class Main {
         try (BufferedReader br = new BufferedReader(new FileReader(newFilename))) {
             String cookie = br.readLine();
             if (!magicCookie.equals(cookie)) {
-                throw new IOException("Invalid file format: magic cookie mismatch");
+                throw new IOException("Invalid file format: magic cookie is mismatched");
             }
             String version = br.readLine();
             if (!fileVersion.equals(version)) {
-                throw new IOException("File version mismatch");
+                throw new IOException("File version is mismatched");
             }
             Moes newMoes = new Moes(br);
             moes = newMoes;
@@ -273,6 +273,20 @@ public class Main {
         } catch (IOException e) {
             System.err.println("Failed to open file: " + e.getMessage());
         }
+    }
+
+    private boolean handleDirty(){
+        System.out.println("Warning: You have not saved your changes. You might lose all your data. Choose what to do!");
+        System.out.println("1). Save your changes to the current file.");
+        System.out.println("2). Save changes to a new file.");
+        System.out.println("3). Discard all changes.");
+        System.out.println("4) Abort Operation. Return to Selection Page.");
+
+        int option=scanner.nextInt();
+        scanner.nextLine();
+
+        //using switch case to operateb as per user input
+        
     }
 // Create a new MOES system
 private void newMoes() {
