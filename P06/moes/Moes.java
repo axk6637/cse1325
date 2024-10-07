@@ -4,6 +4,10 @@ import product.Media;
 import customer.Account;
 import customer.Alacarte;
 import customer.Unlimited;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -126,6 +130,38 @@ public String playMedia(int studentIndex, int mediaIndex){
     Media media= library.get(mediaIndex);
     return student.requestMedia(media);
     }
+public void save(BufferedWriter bw) throws IOException {
+    // Save the size of the media list
+    bw.write(Integer.toString(library.size()) + '\n');
+    // Call each object's save method by iterating
+    for (Media media : library) {
+        media.save(bw);
+    }
+
+    //saving the size of the students list
+    bw.write(Integer.toString(customers.size()) + '\n');
+    // Save each student object
+    for (Student student : customers) {
+        student.save(bw);
+    }
+}
+public Moes(BufferedReader br) throws IOException {
+        // Load the size of the media list
+        int mediaSize = Integer.parseInt(br.readLine());
+        library = new ArrayList<>();
+        for (int i = 0; i < mediaSize; i++) {
+            library.add(new Media(br));
+        }
+
+        // Load the size of the students list
+        int studentSize = Integer.parseInt(br.readLine());
+        customers = new ArrayList<>();
+        for (int i = 0; i < studentSize; i++) {
+            customers.add(new Student(br));
+        }
+    }
+
+
  }
 
 
