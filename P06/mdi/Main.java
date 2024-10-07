@@ -22,11 +22,13 @@ public class Main {
     private static final String magicCookie = "MOES_MAGIC_COOKIE";
     private static final String fileVersion = "1.0";
     private String filename;
+    private boolean dirty;
 
     public Main(){
         moes =new Moes();
         menu= new Menu(); 
         running=true;
+        dirty=false;
 
         //Adding menu items
         menu.addMenuItem(new MenuItem("Exit", () ->{
@@ -241,6 +243,13 @@ public class Main {
 
     // Method to load data from a file
     private void open() {
+        if (dirty) {
+            boolean notAbort= handleDirty(); 
+            if (!notAbort){
+                return;
+            }
+        }
+
         System.out.println("Current filename: "+ filename);
         System.out.print("Enter a new filename to open: ");
         String newFilename = scanner.nextLine();
@@ -258,6 +267,7 @@ public class Main {
             }
             Moes newMoes = new Moes(br);
             moes = newMoes;
+            dirty=false;
             this.filename = newFilename;
             System.out.println("Data successfully loaded from " + filename);
         } catch (IOException e) {
@@ -268,6 +278,7 @@ public class Main {
 private void newMoes() {
     moes = new Moes();
     filename = null;
+    dirty=false;
     System.out.println("New MOES system created.");
 }
 

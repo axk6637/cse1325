@@ -3,6 +3,12 @@ package mdi;
 import moes.Moes;
 import product.Media;
 import customer.Student;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +16,11 @@ public class Main {
     private Menu menu;
     private boolean running;
     private Scanner scanner=new Scanner(System.in);
+
+    private static final String extension = ".moes";
+    private String filename;
+    private static final String magicCookie = "MOES_FILE";
+    private static final String fileVersion = "2.0";
 
     public Main(){
         moes =new Moes();
@@ -190,12 +201,72 @@ public class Main {
             System.out.println("Available points: " + points);
         }
     }
-    //Ending the Application
+   
+    
+    private void newMoes() {
+        moes = new Moes(); // Create a new Moes instance
+        //System.out.println("New MOES file created.");
+    }
+
+    // Saves the current data to the current filename
+    private void save() {
+        if (filename == null) {
+            saveAs();
+            return;
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+            bw.write(magicCookie + "\n");
+            bw.write(fileVersion + "\n");
+            moes.save(bw);
+            System.out.println("Data saved to " + filename);
+        } catch (IOException e) {
+            System.err.println("Failed to save: " + e.getMessage());
+        }
+    }
+
+    // Saves the data to a new file
+    private void saveAs() {
+        System.out.println("Current filename: " + filename);
+        System.out.print("Enter a new filename to save: ");
+        String newFilename = scanner.nextLine();
+        if (!newFilename.endsWith(extension)) {
+            newFilename += extension;
+        }
+        filename = newFilename;
+        save();
+    }
+
+    // Opens a file and loads data into Moes
+    private void open() {
+        System.out.println("Current filename: " + filename);
+        System.out.print("Enter a new filename to open: ");
+        String newFilename = scanner.nextLine();
+        if (!newFilename.endsWith(extension)) {
+            newFilename += extension;
+        }
+        try (BufferedReader br = new BufferedReader(new FileReader(newFilename))) {
+            String cookie = br.readLine();
+            if (!magicCookie.equals(cookie)) {
+                throw new IOException("Invalid file format");
+            }
+            String version = br.readLine();
+            if (!fileVersion.equals(version)) {
+                throw new IOException("File version mismatch");
+            }
+            moes = new Moes(br); // Reconstruct the Moes object
+            filename = newFilename;
+            System.out.println("Data successfully loaded from " + filename);
+        } catch (IOException e) {
+            System.err.println("Failed to open file: " + e.getMessage());
+        }
+    }
+
+    // Ending the Application
     private void endApp() {
-        System.out.println("Exiting application...Thank you for Visiting!");
+        System.out.println("Exiting application...Thank you for visiting!");
         running = false;
     }
-    }
+}
     
 
 
