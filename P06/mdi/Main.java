@@ -108,7 +108,7 @@ public class Main {
 
     //Method to add student
     private void addStudent(){
-        System.out.println("Enter a Student's name: ");
+        System.out.print("Enter a Student's name: ");
         String name= scanner.nextLine();
         System.out.print("Enter valid student id: ");
         int id= scanner.nextInt();
@@ -120,6 +120,7 @@ public class Main {
 
         Student student= new Student(name, id, email, Unlimited);
         moes.addStudent(student);
+        dirty=true;
         System.out.println("Student added.");
     }
 
@@ -141,6 +142,7 @@ public class Main {
 
         Media media= new Media(title, url, points);
         moes.addMedia(media);
+        dirty=true;
         System.out.println("Added Media");
     }
 
@@ -251,7 +253,7 @@ public class Main {
         }
 
         System.out.println("\nCurrent filename: "+ filename);
-        System.out.print("Enter a new filename to open: ");
+        System.out.print("Enter a filename to open: ");
         String newFilename = scanner.nextLine();
         if (!newFilename.endsWith(extension)) {
             newFilename += extension;
@@ -259,7 +261,7 @@ public class Main {
         try (BufferedReader br = new BufferedReader(new FileReader(newFilename))) {
             String cookie = br.readLine();
             if (!magicCookie.equals(cookie)) {
-                throw new IOException("Invalid file format: magic cookie is mismatched");
+                throw new IOException("Invalid file format: Magic Cookie is mismatched");
             }
             String version = br.readLine();
             if (!fileVersion.equals(version)) {
@@ -276,20 +278,51 @@ public class Main {
     }
 
     private boolean handleDirty(){
-        System.out.println("Warning: You have not saved your changes. You might lose all your data. Choose what to do!");
+        System.out.println("\nWarning: You have not saved your changes. You might lose all your data. Choose what to do!");
         System.out.println("1). Save your changes to the current file.");
         System.out.println("2). Save changes to a new file.");
         System.out.println("3). Discard all changes.");
-        System.out.println("4) Abort Operation. Return to Selection Page.");
+        System.out.println("4). Abort Operation. Return to Selection Page.\n");
 
+        System.out.print("Enter your option: ");
         int option=scanner.nextInt();
         scanner.nextLine();
 
-        //using switch case to operateb as per user input
-        
+        //using switch case to operate as per user input
+        switch (option){
+            case 1:
+                save(); //Save to current file
+                return true;
+
+            case 2:
+                saveAs();
+                return true;
+
+            case 3:
+                System.out.println("Discarded");
+                return true;
+
+            case 4:
+                System.out.println("\nOperation is aborted..Going Back to Selection Page..\n\n");
+                return false;
+
+            default:
+            System.out.println("Option Invalid. Please Try Again:(\n\n") ;
+            return handleDirty();
+
+        }
     }
+
 // Create a new MOES system
 private void newMoes() {
+    boolean notAbort=true;
+    if(dirty){
+        notAbort= handleDirty();  // Check if there are unsaved changes
+    }
+    if (!notAbort){
+        return;
+    }
+    
     moes = new Moes();
     filename = null;
     dirty=false;
