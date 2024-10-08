@@ -119,7 +119,7 @@ public class Main {
         try{
             Student student= new Student(name, id, email, Unlimited);
             moes.addStudent(student);
-            
+            save();
             System.out.println("Student added.");
         }catch (IllegalArgumentException e) {
             System.err.println( "Error occured: " + e.getMessage());
@@ -145,7 +145,7 @@ public class Main {
         try{
             Media media= new Media(title, url, points);
             moes.addMedia(media);
-            
+            save();
             System.out.println("Added Media");
         }catch (RuntimeException e) {
             System.err.println( "Error occured: " + e.getMessage());
@@ -205,7 +205,7 @@ public class Main {
         if(morePoints>0){
             String result= moes.buyPoints(studentIndex, morePoints);
             System.out.println(result);
-            
+            save();
         }else{
             System.out.println("Invalid points entered!!");
         }
@@ -291,7 +291,12 @@ public class Main {
         
         
         moes = new Moes();
-        
+        //Asking filename when no parameters
+        System.out.print("Please enter a filename to save your data. Don't lose your progress!: ");
+        filename = scanner.nextLine();
+        if (!filename.endsWith(extension)) {
+            filename += extension;
+        }
         System.out.println("New MOES system created.");
     }
 
