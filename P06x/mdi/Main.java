@@ -17,18 +17,28 @@ public class Main {
     private boolean running;
     private Scanner scanner=new Scanner(System.in);
 
-    //private static fields
     private static final String extension = ".moes";
     private static final String magicCookie = "MOES_MAGIC_COOKIE";
     private static final String fileVersion = "2.0";
     private String filename;
-    private boolean dirty;
 
-    public Main(){
-        moes =new Moes();
+    public Main(String[] args){
         menu= new Menu(); 
         running=true;
-        dirty=false;
+        
+        if(args.length>0){
+            filename =args[0];
+            try{
+                open();
+    
+            }catch (Exception e){
+                System.err.println("Failed to open file: "+e.getMessage());
+                moes= new Moes();
+            }
+        }else{
+            newMoes();
+        }
+
 
         //Adding menu items
         menu.addMenuItem(new MenuItem("Exit", () ->{
@@ -55,23 +65,12 @@ public class Main {
         menu.addMenuItem(new MenuItem("Add a student", () ->{
             addStudent();
         }));
-        menu.addMenuItem(new MenuItem("Save to file", () -> {
-            save();
-        }));
-        menu.addMenuItem(new MenuItem("Save as new file", () -> {
-            saveAs();
-        }));
-        menu.addMenuItem(new MenuItem("Open file", () -> {
-            open();
-        }));
-        menu.addMenuItem(new MenuItem("New MOES", () -> {
-            newMoes();
-        }));
+        
     }
 
     //static main field
     public static void main(String[] args){
-        Main main= new Main();
+        Main main= new Main(args);
         main.mdi();
     }
 
@@ -120,7 +119,7 @@ public class Main {
         try{
             Student student= new Student(name, id, email, Unlimited);
             moes.addStudent(student);
-            dirty=true;
+            
             System.out.println("Student added.");
         }catch (IllegalArgumentException e) {
             System.err.println( "Error occured: " + e.getMessage());
@@ -146,7 +145,7 @@ public class Main {
         try{
             Media media= new Media(title, url, points);
             moes.addMedia(media);
-            dirty=true;
+            
             System.out.println("Added Media");
         }catch (RuntimeException e) {
             System.err.println( "Error occured: " + e.getMessage());
@@ -206,7 +205,7 @@ public class Main {
         if(morePoints>0){
             String result= moes.buyPoints(studentIndex, morePoints);
             System.out.println(result);
-
+            
         }else{
             System.out.println("Invalid points entered!!");
         }
@@ -224,7 +223,6 @@ public class Main {
             System.out.println("Available points: " + points);
         }
     }
-
     private void save() {
         if (filename == null) {
            saveAs();
@@ -263,21 +261,15 @@ public class Main {
     }
 
     // Method to load data from a file
-    private void open() {
-        if (dirty) {
-            boolean notAbort= handleDirty(); 
-            if (!notAbort){
-                return;
-            }
+    private void open()  {
+        
+        if (filename==null){
+            System.out.println("Filename not provided: ");
+            
+            return;
         }
-
-        System.out.println("\nCurrent filename: "+ filename);
-        System.out.print("Enter a filename to open: ");
-        String newFilename = scanner.nextLine();
-        if (!newFilename.endsWith(extension)) {
-            newFilename += extension;
-        }
-        try (BufferedReader br = new BufferedReader(new FileReader(newFilename))) {
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String cookie = br.readLine();
             if (!magicCookie.equals(cookie)) {
                 throw new IOException("Invalid file format: Magic Cookie is mismatched");
@@ -288,65 +280,20 @@ public class Main {
             }
             Moes newMoes = new Moes(br);
             moes = newMoes;
-            dirty=false;
-            this.filename = newFilename;
+        
             System.out.println("Data successfully loaded from " + filename);
         } catch (IOException e) {
             System.err.println("Failed to open file: " + e.getMessage());
         }
     }
-
-    private boolean handleDirty(){
-        System.out.println("\nWarning: You have not saved your changes. You might lose all your data. Choose what to do!");
-        System.out.println("1). Save your changes to the current file.");
-        System.out.println("2). Save changes to a new file.");
-        System.out.println("3). Discard all changes.");
-        System.out.println("4). Abort Operation. Return to Selection Page.\n");
-
-        System.out.print("Enter your option: ");
-        int option=scanner.nextInt();
-        scanner.nextLine();
-
-        //using switch case to operate as per user input
-        switch (option){
-            case 1:
-                save(); //Save to current file
-                return true;
-
-            case 2:
-                saveAs();
-                return true;
-
-            case 3:
-                System.out.println("Discarded");
-                return true;
-
-            case 4:
-                System.out.println("\nOperation is aborted..Going Back to Selection Page..\n\n");
-                return false;
-
-            default:
-            System.out.println("Option Invalid. Please Try Again:(\n\n") ;
-            return handleDirty();
-
-        }
-    }
-
-// Create a new MOES system
-private void newMoes() {
-    boolean notAbort=true;
-    if(dirty){
-        notAbort= handleDirty();  // Check if there are unsaved changes
-    }
-    if (!notAbort){
-        return;
-    }
     
-    moes = new Moes();
-    filename = null;
-    dirty=false;
-    System.out.println("New MOES system created.");
-}
+    private void newMoes() {
+        
+        
+        moes = new Moes();
+        
+        System.out.println("New MOES system created.");
+    }
 
     //Ending the Application
     private void endApp() {
