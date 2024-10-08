@@ -117,11 +117,15 @@ public class Main {
         String email= scanner.nextLine();
         System.out.print("Do you want Unlimited Account? (yes/no): ");
         boolean Unlimited= scanner.nextLine().equalsIgnoreCase("yes");
-
-        Student student= new Student(name, id, email, Unlimited);
-        moes.addStudent(student);
-        dirty=true;
-        System.out.println("Student added.");
+        try{
+            Student student= new Student(name, id, email, Unlimited);
+            moes.addStudent(student);
+            dirty=true;
+            System.out.println("Student added.");
+        }catch (IllegalArgumentException e) {
+            System.err.println( "Error occured: " + e.getMessage());
+        }
+        
     }
 
     //Method to List all Students
@@ -139,11 +143,14 @@ public class Main {
         System.out.print("Enter points: ");
         int points = scanner.nextInt();
         scanner.nextLine();
-
-        Media media= new Media(title, url, points);
-        moes.addMedia(media);
-        dirty=true;
-        System.out.println("Added Media");
+        try{
+            Media media= new Media(title, url, points);
+            moes.addMedia(media);
+            dirty=true;
+            System.out.println("Added Media");
+        }catch (RuntimeException e) {
+            System.err.println( "Error occured: " + e.getMessage());
+        }
     }
 
     //Method to List All Media
@@ -223,6 +230,18 @@ public class Main {
            saveAs();
             return;
         }
+        //extreme bonus 1
+        //Check if file already exists to create auto backup
+        java.io.File saveFile= new java.io.File(filename);
+        if (saveFile.exists()){
+            java.io.File backupFile = new java.io.File(filename + "~");
+
+            if(!saveFile.renameTo(backupFile)){
+                System.err.println("Failed to create backup file");
+                return; //backup fail
+            }
+        }
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
             bw.write(magicCookie + "\n");
             bw.write(fileVersion + "\n");
