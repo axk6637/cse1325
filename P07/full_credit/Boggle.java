@@ -39,7 +39,7 @@ public class Boggle {
                     }
                 }
             }
-            log ("Thread" + threadNumber + " processedboard" + i, 1);
+            log ("Thread" + threadNumber + " processed board" + i, 1);
         }
     }
     // =========== END THREAD METHOD ===========
@@ -113,19 +113,8 @@ public class Boggle {
                 for (Thread thread : threads){
                     thread. join();
                 }
-
-                for (Solution solution : solutions){
-                    log (solution.toString(), 2);
-
-                }
-
-                //final results
-                
-                }catch (Exception e){
-                    System.err.println("Thread was interrupted" +e.getMessage());
-                    System.exit(-1);
-                }
-            }
+    
+        
 
             // =========== END BLOCK OF CODE TO ADD THREADING ===========
 
