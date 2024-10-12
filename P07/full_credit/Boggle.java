@@ -104,7 +104,20 @@ public class Boggle {
                 final int threadEnd= end;
                 final int threadNumber= i;
 
-                
+                Thread thread= new Thread(()-> solveRange(threadStart, threadEnd, threadNumber));
+                threads.add(thread);
+                thread.start();
+                start=end;
+
+                try{
+                    for (Thread thread : threads){
+                        threads.get(0). join();
+                    }
+
+                }catch (Exception e){
+                    System.err.println("Thread was interrupted" +e.getMessage());
+                    System.exit(-1);
+                }
             }
 
             // =========== END BLOCK OF CODE TO ADD THREADING ===========
