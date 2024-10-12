@@ -108,12 +108,19 @@ public class Boggle {
                 threads.add(thread);
                 thread.start();
                 start=end;
+            }
 
-                try{
-                    for (Thread thread : threads){
-                        threads.get(0). join();
-                    }
+                for (Thread thread : threads){
+                    thread. join();
+                }
 
+                for (Solution solution : solutions){
+                    log (solution.toString(), 2);
+
+                }
+
+                //final results
+                
                 }catch (Exception e){
                     System.err.println("Thread was interrupted" +e.getMessage());
                     System.exit(-1);
