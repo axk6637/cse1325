@@ -173,14 +173,13 @@ sys     0m0.000s
 
 
 QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
-
-gi
-
+Yes, adding more thread does speed up the program but the real time decreasing trend is not consistent after the 6th thread. As we can see, with 1 thread, the program took 41.618 seconds and with 2 threads the real time decreased significantly to 20.654 seconds. This decreasing trend continued until 6 threads.
+However, after the 6 threads, the changes were not drastic and inconsistent. For example, the real time with 8 threads was 11.439 seconds, however, at 16 threads, the time was 11.984 seconds. 
+This is because, with more threads, the number of threads is beyond the resources available to manage them so more time is lost in waiting for the resources to become available. 
 
 QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
 
-Yes, from 0.285 seconds to 1.667 seconds for this data set
-
+Yes, adding more threads definitely increase the system load. At first, with fewer threads the system time is very low which is almost 0. With 5 threads the system time increased to 0.015 seconds and with 12 threads the system time again increased to 0.015 seconds. This happens because with more threads, the resources become less available which increase the system load. Even though the system time delay looks small, it does show the added system load and delayed time in processing. 
 
 
 
