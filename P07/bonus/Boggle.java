@@ -50,6 +50,8 @@ public class Boggle {
                     }
                 }
             }
+
+            log ("Thread " +threadNumber+ " processed board "+ boardIndex, 1);
         }
     }
 
@@ -59,6 +61,15 @@ public class Boggle {
     public static void main(String[] args) {
         try {
             // Offer standard help
+
+            List <Thread> threads = new ArrayList<>();
+            for (int i=0; i<numThreads; i++){
+                final int threadNumber=i;
+                Thread thread = new Thread(()-> solveRange(threadNumber));
+                threads.add(thread);
+                thread.start();
+            }
+            
             if(args.length > 0 && args[0].equals("-h")) {
                 System.err.println(
                     """
