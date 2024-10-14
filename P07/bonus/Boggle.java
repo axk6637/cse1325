@@ -62,14 +62,8 @@ public class Boggle {
         try {
             // Offer standard help
 
-            List <Thread> threads = new ArrayList<>();
-            for (int i=0; i<numThreads; i++){
-                final int threadNumber=i;
-                Thread thread = new Thread(()-> solveRange(threadNumber));
-                threads.add(thread);
-                thread.start();
-            }
             
+
             if(args.length > 0 && args[0].equals("-h")) {
                 System.err.println(
                     """
@@ -112,23 +106,31 @@ public class Boggle {
                 System.err.println("Unable to read words from file " + filename + ": " + e);
                 System.exit(-1);
             }
-            
-            // =========== CHANGE THIS BLOCK OF CODE TO ADD THREADING ===========
-            // Find words on the Boggle boards, collecting the solutions in a TreeSet
-            int threadNumber = 0; // This will be set to a unique int for each of your threads
-            for(Board board : boards) {
-                Solver solver = new Solver(board, threadNumber, verbosity);
-                for(String word : words) {
-                    Solution solution = solver.solve(word);
-                    if(solution != null) solutions.add(solution);
-                }
-            }
-            // =========== END BLOCK OF CODE TO ADD THREADING ===========
 
-            // Print all the solutions if requested
-            for(Solution solution : solutions) {
+            List <Thread> threads = new ArrayList<>();
+            for (int i=0; i<numThreads; i++){
+                final int threadNumber=i;
+                Thread thread = new Thread(()-> solveRange(threadNumber));
+                threads.add(thread);
+                thread.start();
+            }
+
+            for (Thread thread: threads){
+                thread.join();
+            }
+
+            for (Solution solution: solutions){
                 log(solution.toString(), 2);
             }
+
+            
+
+
+            
+            
+            // =========== END BLOCK OF CODE TO ADD THREADING ===========
+
+           
 
             // Print the results. These should be EXACTLY the same regardless of # of threads
             System.out.println("\nFound " + solutions.size() + " solutions");
