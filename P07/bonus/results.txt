@@ -1,0 +1,197 @@
+====================
+HOMEWORK P07 RESULTS
+====================
+
+Fall 2024
+
+
+FULL CREDIT
+===========
+
+NOTE: These are measurements which may vary plus your opinions which may vary a LOT. We won't grade for "correctness", just completeness.
+
+QUESTION 1: What Boggle command line arguments ([#boards] and if not default [boardSize])did you use to achieve a 30 to 45 second runtime? Note: We're only interested in the "real" seconds for this question.
+I used:
+java Boggle 100 100 1 words.txt 0
+
+The resulting time was approximately 39.646 seconds.
+
+
+
+
+
+QUESTION 2: Provide the full output (including the time command) for your program, with 1 to 16 threads. **Ensure that the result is the same for all 16 runs.** With bash, you can run all of these with a single command if you like, replacing "90" with whatever Boggle command line arguments you identified in QUESTION 1: 
+
+$ for i in {1..16}; do echo; echo $i Threads; time java Boggle 100 100 $i words.txt 0; done
+
+1 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m41.618s
+user    0m0.000s
+sys     0m0.000s
+
+2 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m20.654s
+user    0m0.000s
+sys     0m0.000s
+
+3 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m14.790s
+user    0m0.000s
+sys     0m0.000s
+
+4 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m13.472s
+user    0m0.000s
+sys     0m0.000s
+
+5 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.490s
+user    0m0.000s
+sys     0m0.015s
+
+6 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.400s
+user    0m0.000s
+sys     0m0.000s
+
+7 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.683s
+user    0m0.000s
+sys     0m0.000s
+
+8 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.439s
+user    0m0.000s
+sys     0m0.000s
+
+9 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.635s
+user    0m0.000s
+sys     0m0.000s
+
+10 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.837s
+user    0m0.000s
+sys     0m0.000s
+
+11 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.903s
+user    0m0.000s
+sys     0m0.000s
+
+12 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m13.390s
+user    0m0.000s
+sys     0m0.015s
+
+13 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.848s
+user    0m0.000s
+sys     0m0.000s
+
+14 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m12.075s
+user    0m0.000s
+sys     0m0.000s
+
+15 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.930s
+user    0m0.000s
+sys     0m0.015s
+
+16 Threads
+
+Found 56911 solutions
+Hash is 0x13059C5A
+
+real    0m11.984s
+user    0m0.000s
+sys     0m0.000s
+
+
+
+
+
+QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
+Yes, adding more thread does speed up the program but the real time decreasing trend is not consistent after the 6th thread. As we can see, with 1 thread, the program took 41.618 seconds and with 2 threads the real time decreased significantly to 20.654 seconds. This decreasing trend continued until 6 threads.
+However, after the 6 threads, the changes were not drastic and inconsistent. For example, the real time with 8 threads was 11.439 seconds, however, at 16 threads, the time was 11.984 seconds. 
+This is because, with more threads, the number of threads is beyond the resources available to manage them so more time is lost in waiting for the resources to become available. 
+
+QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
+
+Yes, adding more threads definitely increase the system load. At first, with fewer threads the system time is very low which is almost 0. With 5 threads the system time increased to 0.015 seconds and with 12 threads the system time again increased to 0.015 seconds. This happens because with more threads, the resources become less available which increase the system load. Even though the system time delay looks small, it does show the added system load and delayed time in processing. 
+
+
+
+
+
+
+BONUS
+=====
+
+QUESTION 5: Time your version of Boggle as you did for the full credit version. Is this additional layer of threading faster, slower, or roughly equivalent in performance? Why?
+
+
+YOUR Timing:
+
+
