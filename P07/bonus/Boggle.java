@@ -24,9 +24,35 @@ public class Boggle {
     private static String filename = "words.txt"; // default (this is the supplied file of 971 common words)
     private static int verbosity = 0;   // smaller ints mean less output - us 0 for timing
     
+    private static AtomicInteger nextBoardIndex= new AtomicInteger(0);
+
     // =========== WRITE AND INVOKE THIS METHOD FOR EACH THREAD ===========
-    private static void solveRange(int first, int lastPlusOne, int threadNumber) {
+    private static void solveRange( int threadNumber) {
+        while (true){
+            int boardIndex= nextBoardIndex.getAndIncrement();
+
+            if(boardIndex>=numberOfBoards){
+                break;
+
+            }
+
+            Board board;
+            synchronized (boards){
+                board= boards.get(boardIndex);
+            }
+
+            Solver solver= new Solver(board, threadNumber, verbosity);
+            for (String word: words){
+                Solution solution = solver.solve(word);
+                if (solution!=null){
+                    synchronized (solutions){
+                        solutions.add(solution);
+                    }
+                }
+            }
+        }
     }
+
     // =========== END THREAD METHOD ===========
 
 
