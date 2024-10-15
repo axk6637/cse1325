@@ -12,7 +12,7 @@ NOTE: These are measurements which may vary plus your opinions which may vary a 
 
 QUESTION 1: What Boggle command line arguments ([#boards] and if not default [boardSize])did you use to achieve a 30 to 45 second runtime? Note: We're only interested in the "real" seconds for this question.
 I used:
-java Boggle 100 100 1 words.txt 0
+time java Boggle 100 100 1 words.txt 0
 
 The resulting time was approximately 39.646 seconds.
 
@@ -191,30 +191,8 @@ BONUS
 
 QUESTION 5: Time your version of Boggle as you did for the full credit version. Is this additional layer of threading faster, slower, or roughly equivalent in performance? Why?
 
+I timed both the full_credit and bonus 
 
-YOUR Timing:7.129 seconds
-I timed both the full-credit and bonus version of my Boggle class using the input parameters: 100 boards, 50x50 size, 10 threads, words.txt, and verbosity level 0.
-
-Results:
-For Bonus version:
-Found 36804 solutions
-Hash is 0xB0967FFA
-
-real    0m5.654s
-user    0m0.000s
-sys     0m0.000s
-
-
-For Full-credit version:
-Found 36804 solutions
-Hash is 0xB0967FFA
-
-real    0m5.790s
-user    0m0.000s
-sys     0m0.000s
-
-The bonus version performed slightly better than the full credit version which shows a small performance improvement due to dynamic board allocation.
-The bonus version allocates boards dynamically to threads which allows the threads that finish early to immediately start working on new threads.
-Doing this helps to ensure that there is better load balancing and no threads sit idle for long time. Whereas, in the full credit version. each thread is assigned to a fixed range of boards leading to some threads remaining idle after finishing eatly.
+YOUR Timing:
 
 

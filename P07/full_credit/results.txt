@@ -12,7 +12,7 @@ NOTE: These are measurements which may vary plus your opinions which may vary a 
 
 QUESTION 1: What Boggle command line arguments ([#boards] and if not default [boardSize])did you use to achieve a 30 to 45 second runtime? Note: We're only interested in the "real" seconds for this question.
 I used:
-java Boggle 100 100 1 words.txt 0
+time java Boggle 100 100 1 words.txt 0
 
 The resulting time was approximately 39.646 seconds.
 
