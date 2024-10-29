@@ -22,6 +22,12 @@ int main(int argc, char* argv[]){
            std::cout <<num << std::endl; 
     }
 
-    
+    std::cout << "Words: " << std::endl;
+    for(auto word: *words){
+        std::cout <<word <<std::endl;
+    }
+
+    delete words; 
+    return 0;
 
 }
