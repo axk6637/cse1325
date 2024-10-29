@@ -17,4 +17,11 @@ int main(int argc, char* argv[]){
         }
     }
 
+    std::cout << "Numbers: " <<std::endl;
+    for(auto num: numbers){
+           std::cout <<num << std::endl; 
+    }
+
     
+
+}
