@@ -246,6 +246,7 @@ public class Main {
             bw.write(magicCookie + "\n");
             bw.write(fileVersion + "\n");
             moes.save(bw);
+            dirty= false;
             System.out.println("Data saved to " + filename);
         } catch (IOException e) {
             System.err.println("Failed to save: " + e.getMessage());
@@ -263,7 +264,7 @@ public class Main {
     }
 
     // Method to load data from a file
-    private void open() {
+    private void open(){
         if (dirty) {
             boolean notAbort= handleDirty(); 
             if (!notAbort){
