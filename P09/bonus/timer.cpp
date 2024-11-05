@@ -10,14 +10,16 @@ void Timer::tic() {
 
     
     // Decrement _seconds
-    --_seconds; 
+    _seconds--; 
     if (_seconds == -1) {
         _seconds = 59;
         _minutes--;
         if (_minutes == -1) {
             _minutes = 59;
             _hours--;
-             
+           if (_hours == -1) {
+                _hours = 23;
+            }  
         }
     }
     if (_hours == 0 && _minutes == 0 && _seconds == 0) {

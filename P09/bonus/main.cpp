@@ -40,8 +40,9 @@ int main(int argc, char* argv[]) {
         return -2;
     } catch (const std::invalid_argument&) {
         std::cerr << "Invalid input format: Please enter integers inuts." << std::endl;
+    
     }catch (const std::runtime_error& e) {
         std::cout << e.what() << std::endl;  // Catch Timer expiration 
-
+    }
     return 0;
 }
