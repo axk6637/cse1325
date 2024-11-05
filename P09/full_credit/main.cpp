@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
         std::string input;
 
         //prompt to the user
-        std::cout << "Enter 'q' to quit or press Enter to tick: ";
+        std::cout << "Enter 'q' to quit or press Enter to tick/continue: ";
 
         while (true) {
             // Get user input
@@ -32,16 +32,16 @@ int main(int argc, char* argv[]) {
             // Print the current time after ticking
             std::cout << "The time is now ";
             clock.print();
-            std::cout << std::endl;
+            //std::cout << std::endl;
 
             // Get user input again
-            std::cout << "Enter 'q' to quit or press Enter to tick: ";
+            
         }
     }catch (const std::out_of_range& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return -2;
     } catch (const std::invalid_argument&) {
-        std::cerr << "Invalid input format. Please enter integers for hours, minutes, and seconds." << std::endl;
+        std::cerr << "Invalid input format: Please enter integers inputs." << std::endl;
         return -1;
     }
 
