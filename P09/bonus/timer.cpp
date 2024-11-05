@@ -17,7 +17,7 @@ void Timer::tic() {
         if (_minutes == -1) {
             _minutes = 59;
             _hours--;
-         --_seconds;    
+             
         }
     }
     if (_hours == 0 && _minutes == 0 && _seconds == 0) {
