@@ -3,10 +3,8 @@
 
 #include <iostream> 
 
-
-
 class Purse{
-    protected:
+private:
     int _pounds;
     int _shillings;
     int _pence;
@@ -16,9 +14,11 @@ class Purse{
 
 public: 
 
-    Purse(int pounds=0, int shillings=0, int pence=0);//populating with default values
+    Purse(int pounds=0, int shillings=0, int pence=0);
 
-    friend std::ostream& operator <<(std::ostream& os, const Purse& purse);//friend operattor to dtream out the value of Purse Object
+    friend std::ostream& operator <<(std::ostream& ost, const Purse& purse);
+    friend std::istream& operator >>(std::istream& ist, Purse& purse);
+    
 
     bool operator==(const Purse& purse) const;
     bool operator!=(const Purse& purse) const;
