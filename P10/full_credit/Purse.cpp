@@ -51,5 +51,45 @@ bool Purse::operator>=(const Purse& purse) const{
     return !(*this <purse) ;
 
 }
+// Pre-increment operator
+Purse& Purse::operator++() {
+    ++_pence;
+    rationalize();
+    return *this;
+}
 
+// Post-increment operator
+Purse Purse::operator++(int) {
+    Purse temp = *this;
+    ++(*this);
+    return temp;
+}
+
+// Addition operator
+Purse Purse::operator+(const Purse& purse) const {
+    return Purse(_pounds + purse._pounds, _shillings + purse._shillings, _pence + purse._pence);
+}
+
+// Subtraction operator
+Purse Purse::operator-(const Purse& purse) const {
+    return Purse(_pounds - purse._pounds, _shillings - purse._shillings, _pence - purse._pence);
+}
+
+// Compound addition operator
+Purse& Purse::operator+=(const Purse& purse) {
+    _pounds += purse._pounds;
+    _shillings += purse._shillings;
+    _pence += purse._pence;
+    rationalize();
+    return *this;
+}
+
+// Compound subtraction operator
+Purse& Purse::operator-=(const Purse& purse) {
+    _pounds -= purse._pounds;
+    _shillings -= purse._shillings;
+    _pence -= purse._pence;
+    rationalize();
+    return *this;
+}
 
