@@ -2,7 +2,8 @@
 #define PURSE_H
 
 #include <iostream>
-#include <compare>
+
+
 
 class Purse{
     private:
@@ -19,7 +20,12 @@ public:
 
     friend std::ostream& operator <<(std::ostream& os, const Purse& purse);//friend operattor to dtream out the value of Purse Object
 
-    auto operator <=> (const Purse& purse) const=default;
+    bool operator==(const Purse& purse) const;
+    bool operator!=(const Purse& other) const;
+    bool operator<(const Purse& other) const;
+    bool operator<=(const Purse& other) const;
+    bool operator>(const Purse& other) const;
+    bool operator>=(const Purse& other) const;
 
     Purse& operator++(); //pre-increment, returns a ref to the current object
     Purse operator++(int); //post-increment, returns a copy of the orginal Purse object
@@ -30,9 +36,10 @@ public:
 
     //Compound airthmetic operatos
     Purse& operator+=(const Purse& purse);
-    Purse& operator-(const Purse& purse);
+    Purse& operator-=(const Purse& purse);
 
 };
 
 #endif 
+
 
