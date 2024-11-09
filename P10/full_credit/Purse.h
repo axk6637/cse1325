@@ -6,7 +6,7 @@
 
 class Purse{
     private:
-    int_pounds;
+    int _pounds;
     int _shillings;
     int _pence;
 
@@ -24,10 +24,15 @@ public:
     Purse& operator++(); //pre-increment, returns a ref to the current object
     Purse operator++(int); //post-increment, returns a copy of the orginal Purse object
 
-    
+    //Arithmetic Operators
+    Purse operator+(const Purse& purse) const;
+    Purse operator-(const Purse& purse) const;
 
+    //Compound airthmetic operatos
+    Purse& operator+=(const Purse& purse);
+    Purse& operator-(const Purse& purse);
 
+};
 
-
-}
+#endif 
 
