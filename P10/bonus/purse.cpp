@@ -12,6 +12,20 @@ std::ostream& operator << (std::ostream& ost, const Purse& purse){
     return ost;
 }
 
+std::istream& operator >>(std::istream& ist, Purse& purse){
+    char pound, shillingC, penceC;
+
+    ist >>pound>>purse._pounds >>purse._shillings >>shillingC >>purse._pence >>penceC;
+
+    if (pound != '#' || shillingC != 's' || penceC!='d'){
+        std::cerr << "Incorrect formatting. Retry." <<std::endl;
+    }else{
+        purse.rationalize();
+    }
+    
+    return ist;
+}
+
 void Purse::rationalize(){
     if (_pence >= 12){
         _shillings += _pence /12;
