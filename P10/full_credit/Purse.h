@@ -6,7 +6,7 @@
 
 
 class Purse{
-    private:
+    protected:
     int _pounds;
     int _shillings;
     int _pence;
