@@ -7,6 +7,7 @@ int main (){
     std::cout << "Welcome to Ye Olde Bank of Merry England\n\n";
     
     int count;
+    std::cout << "How many accounts? ";
     std::cin >> count;
     std::cin.ignore();
 
@@ -26,8 +27,26 @@ int main (){
 
         vault[name] = Purse(pounds, shillings, pence);  
         std::cout << "Account " << name << " created with " << vault[name] << "\n\n";
+
+        
     }
+        Purse total;  // A Purse object
+        std::cout << "\n\nAccount List\n============\n";
+        // Iterator
+         for (std::map<std::string, Purse>::iterator it = vault.begin(); 
+                                                     it != vault.end();
+                                                     ++it) 
+        {
+        std::cout << "  " << it->first << " with " << it->second << '\n';  
+        total += it->second;  
+        }
 
-
-
+        std::cout << "\nTotal in bank is " << total << '\n';
+ 
+        return 0;
 }
+
+    
+
+
+
