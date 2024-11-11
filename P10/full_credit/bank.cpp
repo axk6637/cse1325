@@ -31,19 +31,16 @@ int main (){
         
     }
         Purse total;  // A Purse object
-        std::cout << "\n\nAccount List\n============\n\n";
-        // Iterator
-         for (std::map<std::string, Purse>::iterator it = vault.begin(); 
-                                                     it != vault.end();
-                                                     ++it) 
-        {
-        std::cout << "  " << it->first << " with " << it->second << '\n';  
-        total += it->second;  
-        }
+        
+         std::cout << "\n\nAccount List\n============\n\n";
 
-        std::cout << "\nTotal in bank is " << total << '\n';
- 
-        return 0;
+
+for (std::pair<const std::string, Purse>& i: vault) {
+    std::cout << "  " << i.first << " with " << i.second << '\n';
+    total += i.second;
+}
+
+std::cout << "\nTotal in bank is " << total << '\n';
 }
 
     
