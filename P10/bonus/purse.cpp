@@ -1,3 +1,4 @@
+#include <iostream>
 #include "purse.h"
 
 Purse::Purse (int pounds, int shillings, int pence)
@@ -18,8 +19,11 @@ std::istream& operator >>(std::istream& ist, Purse& purse){
     ist >>pound>>purse._pounds >>purse._shillings >>shillingC >>purse._pence >>penceC;
 
     if (pound != '#' || shillingC != 's' || penceC!='d'){
-        std::cerr << "Incorrect formatting. Retry." <<std::endl;
-    }else{
+
+        std::cerr << "Retry." <<std::endl;
+         
+        exit(1);
+        }else{
         purse.rationalize();
     }
     

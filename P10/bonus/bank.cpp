@@ -16,31 +16,32 @@ int main (){
     
     for (int i = 0; i < count; ++i) {
         std::string name;
-        int pounds, shillings, pence;
+        Purse purse;
         
         std::cout << "Name account " << i << ": ";
         std::getline(std::cin, name);  
         
-        std::cout << "Enter your initial deposit (pounds shillings pence): ";
-        std::cin >> pounds >> shillings >> pence;
-        std::cin.ignore();  
+        std::cout << "Enter your initial deposit (#3 4s5d): ";
+        std::cin >> purse;
+        //std::cin.ignore();  
 
-        vault[name] = Purse(pounds, shillings, pence);  
+        if (std::cin.fail()){
+            std::cerr << "Invalid Format. Please use #pounds shillings s pence d (eg: #3 4s5d)\n";
+            return -1;
+        }
+        vault[name] = purse;  
         std::cout << "Account " << name << " created with " << vault[name] << "\n\n";
 
         
     }
         Purse total;  // A Purse object
         std::cout << "\n\nAccount List\n============\n\n";
-        // Iterator
-         for (std::map<std::string, Purse>::iterator it = vault.begin(); 
-                                                     it != vault.end();
-                                                     ++it) 
-        {
-        std::cout << "  " << it->first << " with " << it->second << '\n';  
-        total += it->second;  
-        }
+       
 
+for (std::pair<const std::string, Purse>& i: vault) {
+    std::cout << "  " << i.first << " with " << i.second << '\n';
+    total += i.second;
+}
         std::cout << "\nTotal in bank is " << total << '\n';
  
         return 0;
