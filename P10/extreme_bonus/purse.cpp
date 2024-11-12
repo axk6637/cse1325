@@ -1,6 +1,8 @@
 #include <iostream>
 #include "purse.h"
 
+//extreme bonus
+const std::string pound_utf8 ="\xC2\xA3";
 Purse::Purse (int pounds, int shillings, int pence)
     : _pounds{pounds}, _shillings{shillings}, _pence {pence}{
         rationalize ();
@@ -8,21 +10,22 @@ Purse::Purse (int pounds, int shillings, int pence)
     }
 
 std::ostream& operator << (std::ostream& ost, const Purse& purse){
-    ost << "£" << purse._pounds << ' '<<purse._shillings << 's' << purse._pence << 'd';
+    ost << pound_utf8 << purse._pounds << ' '<<purse._shillings << 's' << purse._pence << 'd';
 
     return ost;
 }
 
 std::istream& operator >>(std::istream& ist, Purse& purse){
-    char pound, shillingC, penceC;
+    std::string pound;
+    char shillingC, penceC;
 
-    ist >>pound>>purse._pounds >>purse._shillings >>shillingC >>purse._pence >>penceC;
+    ist >>pound >>purse._pounds >>purse._shillings >>shillingC >>purse._pence >>penceC;
 
-    if (pound != '#' || shillingC != 's' || penceC!='d'){
+    if (pound != "\xC2\xA3" || shillingC != 's' || penceC !='d'){
 
         std::cerr << "Retry." <<std::endl;
          
-        exit(1);
+        //exit(1);
         }else{
         purse.rationalize();
     }

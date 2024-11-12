@@ -21,12 +21,12 @@ int main (){
         std::cout << "Name account " << i << ": ";
         std::getline(std::cin, name);  
         
-        std::cout << "Enter your initial deposit (#3 4s5d): ";
+        std::cout << "Enter your initial deposit (£3 4s5d): ";
         std::cin >> purse;
         //std::cin.ignore();  
 
         if (std::cin.fail()){
-            std::cerr << "Invalid Format. Please use #pounds shillings s pence d (eg: #3 4s5d)\n";
+            std::cerr << "Invalid Format. Please use £pounds shillingss penced (eg: £3 4s5d)\n";
             return -1;
         }
         vault[name] = purse;  
