@@ -2,6 +2,7 @@
 #define PURSE_H
 
 #include <iostream> 
+#include <string>
 
 class Purse{
 private:
@@ -10,10 +11,11 @@ private:
     int _pence;
 
     void rationalize();
+    
 
 
 public: 
-
+    static const std::string pound_utf8;
     Purse(int pounds=0, int shillings=0, int pence=0);
 
     friend std::ostream& operator <<(std::ostream& ost, const Purse& purse);
