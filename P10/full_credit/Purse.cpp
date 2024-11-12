@@ -5,9 +5,10 @@ Purse::Purse (int pounds, int shillings, int pence)
         rationalize ();
 
     }
+    std::string poundSym= "\u00A3"; //using unicode 
 
 std::ostream& operator << (std::ostream& ost, const Purse& purse){
-    ost << "£" << purse._pounds << ' '<<purse._shillings << 's' << purse._pence << 'd';
+    ost << poundSym<< purse._pounds << ' '<<purse._shillings << 's' << purse._pence << 'd';
 
     return ost;
 }
