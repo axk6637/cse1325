@@ -8,6 +8,22 @@
 
 typedef double Temp;
 
+std::istream& operator >>(std::istream& ist, Date& date){
+    int _year, _month, _day;
+    char sep;
+
+    ist >>_year >> sep >>_month>>sep>>_day;
+
+    if (!ist || sep != '/' || _month <= 0 || _day <= 0) {
+        ist.setstate(std::ios::failbit); // Set the stream to fail
+        return ist;
+    }
+
+    date= Date(_year,_month, _day);
+
+    return ist;
+}
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cerr << "usage: " << argv[0] << " <data file>" << std::endl;
