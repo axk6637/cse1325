@@ -58,8 +58,14 @@ int main(int argc, char* argv[]) {
         Date end_date(end_year, end_month, end_day);
 
 
-        std::map<Date, Temp>::iterator it = temps.lower_bound(start_date);
-      
+        
+       //find starting point for iteration
+        std::map<Date, Temp>::iterator it = temps.find(start_date);
+
+        //if there is no match for exact start_date, proceed with the date greater(or equal) to start_date
+        if (it == temps.end() || it->first < start_date) {
+         it = temps.lower_bound(start_date);
+        } 
 
         while (it != temps.end() && it->first <= end_date) {
             std::cout << std::setw(12) << it->first
