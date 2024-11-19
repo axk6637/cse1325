@@ -61,18 +61,23 @@ int main(int argc, char* argv[]) {
     
 
     while (std::cin) {
-        int start_year, start_month, start_day;
-        int end_year, end_month, end_day;
+        Date start_date, end_date;
 
-        std::cout << "Starting date to list (year month day): ";
-        if (!(std::cin >> start_year >> start_month >> start_day)) break;
+        std::cout << "Starting date to list (YYYY/MM/DD): ";
+        if (!(std::cin >> start_date)) break;
 
-        std::cout << "Ending date to list (year month day): ";
-        if (!(std::cin >> end_year >> end_month >> end_day)) break;
+        if(temps.find(start_date)==temps.end()){
+            std::cerr <<start_date<< "is not in the database!" <<std::endl;
+            continue;
+        }
 
-        Date start_date(start_year, start_month, start_day);
-        Date end_date(end_year, end_month, end_day);
+        std::cout << "Ending date to list (YYYY/MM/DD): ";
+        if (!(std::cin >> end_date)) break;
 
+        if(end_date <start_date){
+            std::cerr <<end_date << " is earlier than" << start_date <<std::endl;
+            continue;
+        }
 
         
        //find starting point for iteration
@@ -89,7 +94,8 @@ int main(int argc, char* argv[]) {
                       << std::endl;
             ++it;
         }
-    }
+        
+    }   
 
     return 0;
 }
