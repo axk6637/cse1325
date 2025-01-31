@@ -1,1 +1,1 @@
-# cse1325
+# cse1325- A Media Management System in Java for UTA students with a meu-driven UI and regression tests for feature validation. Applied object-oriented design principles like inheritance and polymorphism to enhance system functionality.
